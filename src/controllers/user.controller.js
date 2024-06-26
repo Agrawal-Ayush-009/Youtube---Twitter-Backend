@@ -297,7 +297,7 @@ const updateUserDetails = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All fields are required!");
   }
 
-  const user = User.findByIdAndUpdate(
+  const user = await User.findByIdAndUpdate(
     req.user?._id,
     {
       $set: {
@@ -430,7 +430,7 @@ const getUserChannelDetails = asyncHandler(async (req, res) => {
   ]);
 
   if (!channel?.length) {
-    throw new ApiError(400, "Channel doesn't exist");
+    throw new ApiError(400, "Channel does not exist");
   }
 
   console.log("CHANNEL", channel);
@@ -466,7 +466,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
                 {
                   $project: {
                     fullName: 1,
-                    avatar: 1,
+                    username: 1,
                     avatar: 1,
                   },
                 },
@@ -484,6 +484,8 @@ const getWatchHistory = asyncHandler(async (req, res) => {
       },
     },
   ]);
+
+  console.log("HISTORY", user);
 
   return res
     .status(200)
