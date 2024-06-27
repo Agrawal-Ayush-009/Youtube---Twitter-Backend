@@ -13,4 +13,5 @@ router.route("/post-tweet").post(verifyJWT, createTweet);
 router.route("/get-tweets").get(verifyJWT, getUserTweets);
 router.route("/update-tweet").patch(verifyJWT, updateTweets);
 router.route("/delete-tweet").delete(verifyJWT, deleteTweet);
+
 export default router;
